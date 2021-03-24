@@ -1,0 +1,17 @@
+body{
+    align-items: center;
+    box-sizing: border-box;
+    background-color: black;
+    display: flex;
+    margin: 0 auto;
+    width: 90%;
+    height: 50%;
+    padding-top: 2.5%;
+}
+
+canvas{
+    
+    background-color: black;
+    width: 90%;
+    margin: 0 auto;
+  } 

@@ -1,0 +1,10 @@
+Añadir:
+Explosiones
+Sonidos
+Barras vida
+HyperSpace
+Ciclo de juego
+Menu
+
+Cambiar:
+Clases

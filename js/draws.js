@@ -353,7 +353,7 @@ class stars
                 this.count[index*3+2]=randomInt(1,15);
             }
         }
-        if(mouseL) 
+        if(mouseL && this.ls<500) 
         {
             this.ls+=5;
             this.speed++;

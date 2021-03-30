@@ -286,6 +286,19 @@ function drawBar(x,y,w,h,v)
     //ctx.fill();
 }*/
 
+
+let c=document.getElementById("myCanvas");
+let ctx=c.getContext("2d");
+ctx.canvas.width  = window.innerWidth;
+ctx.canvas.height = window.innerHeight;
+
+function text(x, y, size, text)
+{
+    ctx.font = 'bold '+ size + 'pt Permanent Marker';
+    ctx.fillStyle = 'red';
+    ctx.fillText(text, x - (text.length/2*size), y - size/2);
+}
+
 function randomInt(min, max) 
 {
     return Math.floor(Math.random() * (max - min + 1)) + min;

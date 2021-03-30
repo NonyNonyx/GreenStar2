@@ -45,11 +45,6 @@ function main()
 }
 main();*/
 
-let c=document.getElementById("myCanvas");
-let ctx=c.getContext("2d");
-ctx.canvas.width  = window.innerWidth;
-ctx.canvas.height = window.innerHeight;
-
 starBG=new stars(200, 1, 1);
 
 player1=new Nave
@@ -99,6 +94,7 @@ function main()
   ctx.clearRect(0,0,c.width,c.height);
   starBG.doShit();
   player1.doShit();
+  text(c.width/2, c.height/2, 100, 'GAME OVER');
   requestAnimationFrame(main);
 }
 main();

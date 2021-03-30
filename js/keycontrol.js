@@ -5,6 +5,10 @@ let downPressed=false;
 let spacePressed=false;
 let enterPressed=false;
 let escPressed=false;
+let mouseL=false;
+let mouseR=false;
+let mouseX=0;
+let mouseY=0;
 
 function keyDownHandler(e) 
 {
@@ -61,16 +65,35 @@ function mouseMoveHandler(e)
     let relativeX = e.clientX - c.offsetLeft;
     if(relativeX > 0 && relativeX < c.width) 
     {
-        navx = relativeX - nave1.width/2;
+        mouseX = relativeX;
+    }
+    let relativeY = e.clientY - c.offsetTop;
+    if(relativeY > 0 && relativeY < c.height) 
+    {
+        mouseY = relativeY;
     }
 }
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
+document.addEventListener('mousedown', function(e) 
+{
+    e.preventDefault();
+    if(e.button == 0) mouseL=true;
+    if(e.button == 1) mouseR=true;
+}, false)
+document.addEventListener('mouseup', function(e) 
+{
+    e.preventDefault();
+    if(e.button == 0) mouseL=false;
+    if(e.button == 1) mouseR=false;
+}, false)
 
+/*
 function controlNave()
 {
+    
     if(leftPressed) navx-=5;
     if(rightPressed) navx+=5;
     
@@ -85,7 +108,7 @@ function controlNave()
   {
     //spacePressed=false;
     disparando=true;
-    newFF();
+    player1.newFire();
   }
   if(spacePressed==false && disparando==true) disparando=false;
-}
+}*/

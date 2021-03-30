@@ -1,18 +1,15 @@
-let nave1=new Image();
-nave1.src='img/nave1.png';
+//let nave1=new Image(); nave1.src='img/nave1.png';
 /*L1 4,36
 L2 105,36*/
-let nave2=new Image();
-nave2.src='img/nave2.png';
-
+//let nave2=new Image(); nave2.src='img/nave2.png';
+/*
 let malo1=new Image();
 malo1.src='img/malo1.png';
 
 let help1=new Image();
 help1.src='img/help1.png';
 
-let ff1=new Image();
-ff1.src='img/ff1.png';
+//let ff1=new Image(); ff1.src='img/ff1.png';
 
 let ef1=new Image();
 ef1.src='img/ef1.png';
@@ -20,17 +17,17 @@ ef1.src='img/ef1.png';
 let exp=new Image();
 exp.src='img/xplodeSprite.png';
 
-let nave=nave1;
+//let nave=nave1;
 
 let starcount=200;
 let starspeed=5;
 let stars=[];
-let FF=[];
+//let FF=[];
 let EF=[];
 let maxShoot=20;
 let shootSpeed=10;
 let maloMovSpeed=1;
-let vida=100;
+//let vida=100;
 let vidaMalos=100;
 let expFrame=50;
 let expX=0;
@@ -44,20 +41,11 @@ let malos=[];
 
 
 
-
-function createFF()
-{
-    for (let index = 0; index < maxShoot*4; index++) 
-    {
-        FF[index]=-1;
-    }
-}
-
 function createEF()
 {
     for (let index = 0; index < maxShoot*2; index++) 
     {
-        EF[index]=1000;
+        EF[index]=c.height;
     }
 }
 
@@ -116,36 +104,6 @@ function moveStars()
     }
 }
 
-function drawFF()
-{
-    for (let index = 0; index < FF.length/2; index++) 
-    {
-        if(FF[index*2+1]>0) ctx.drawImage(ff1, FF[index*2], FF[index*2+1]);
-    }
-}
-
-function moveFF()
-{
-    for (let index = 0; index < FF.length/2; index++) 
-    {
-        if(FF[index*2+1]>0) FF[index*2+1]-=shootSpeed;
-    }
-}
-
-function newFF()
-{
-    for (let index = 0; index < FF.length/4; index++) 
-    {
-        if(FF[index*2+1]<=0) 
-        {
-            FF[index*2]=navx+3-ff1.width/2;
-            FF[index*2+1]=navy+30-ff1.height;
-            FF[index*2+2]=navx+95-ff1.width/2;
-            FF[index*2+3]=navy+30-ff1.height;
-            index=FF.length+1;
-        }
-    }
-}
 
 function createMalos()
 {
@@ -211,7 +169,7 @@ function newEF(x,y)
 {
     for (let index = 0; index < EF.length/2; index++) 
     {
-        if(EF[index*2+1]>900) 
+        if(EF[index*2+1]>c.height) 
         {
             EF[index*2]=x;
             EF[index*2+1]=y;
@@ -224,7 +182,7 @@ function drawEF()
 {
     for (let index = 0; index < EF.length/2; index++) 
     {
-        if(EF[index*2+1]<900) ctx.drawImage(ef1, EF[index*2], EF[index*2+1]);
+        if(EF[index*2+1]<c.height) ctx.drawImage(ef1, EF[index*2], EF[index*2+1]);
     }
 }
 
@@ -232,7 +190,7 @@ function moveEF()
 {
     for (let index = 0; index < EF.length/2; index++) 
     {
-        if(EF[index*2+1]<=900) EF[index*2+1]+=shootSpeed;
+        if(EF[index*2+1]<=c.height) EF[index*2+1]+=shootSpeed;
     }
 }
 
@@ -326,4 +284,90 @@ function drawBar(x,y,w,h,v)
     ctx.strokeStyle='white';
     ctx.strokeRect(x-1,y-1,w+2,h+2);
     //ctx.fill();
+}*/
+
+function randomInt(min, max) 
+{
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function drawPixel(x, y, c) 
+{
+    let roundedX = Math.round(x);
+    let roundedY = Math.round(y);
+    ctx.beginPath();
+    ctx.fillStyle = '#'+c+c+c;
+    ctx.fillRect(roundedX, roundedY, 3, 3);
+    ctx.fill();
+    ctx.closePath();
+}
+
+function drawBar(x,y,w,h,v)
+{
+    ctx.fillStyle='#'+(10-v/10)+(v/10-1)+'0';
+    ctx.fillRect(x,y,w/100*v,h);
+    ctx.strokeStyle='white';
+    ctx.strokeRect(x-1,y-1,w+2,h+2);
+    //ctx.fill();
+}
+
+class stars
+{
+    constructor(count, speed, ls)
+    {
+        this.count=[];
+        this.speed=speed;
+        this.ls=ls;
+        for (let index = 0; index < count; index++) 
+        {
+            this.count[index*3]=randomInt(0,c.width);
+            this.count[index*3+1]=randomInt(0,c.height);
+            this.count[index*3+2]=randomInt(1,15);
+        }
+    }
+
+    _draw()
+    {
+        for (let index = 0; index < this.count.length/3; index++) 
+        {
+            let color=this.count[index*3+2];
+            color=color.toString(16);
+            ctx.beginPath();
+            ctx.fillStyle = '#'+color+color+color;
+            ctx.fillRect(this.count[index*3], this.count[index*3+1], 3, 2+(this.count[index*3+2]/15)*this.ls);
+            ctx.fill();
+            ctx.closePath();
+            //drawBar(this.count[index*3],this.count[index*3+1],100,5,this.count[index*3+2]*10)
+        }
+    }
+
+    _move()
+    {
+        for (let index = 0; index < this.count.length/3; index++) 
+        {
+            this.count[index*3+1]+=this.count[index*3+2]+this.speed;
+            if(this.count[index*3+1]>c.height)
+            {
+                this.count[index*3]=randomInt(0,c.width);
+                this.count[index*3+1]=randomInt(0,5);
+                this.count[index*3+2]=randomInt(1,15);
+            }
+        }
+        if(mouseL) 
+        {
+            this.ls+=5;
+            this.speed++;
+        }
+        if(!mouseL && this.ls>1) 
+        {
+            this.ls-=5;
+            this.speed--;
+        }
+    }
+
+    doShit()
+    {
+        this._draw();
+        this._move();
+    }
 }

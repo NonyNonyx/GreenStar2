@@ -294,9 +294,9 @@ ctx.canvas.height = window.innerHeight;
 
 function text(x, y, size, text)
 {
-    ctx.font = 'bold '+ size + 'pt Permanent Marker';
+    ctx.font = 'bold '+ size + 'pt Faster One';
     ctx.fillStyle = 'red';
-    ctx.fillText(text, x - (text.length/2*size), y - size/2);
+    ctx.fillText(text, x - ctx.measureText(text).width/2, y + size/2);
 }
 
 function randomInt(min, max) 
@@ -366,12 +366,12 @@ class stars
                 this.count[index*3+2]=randomInt(1,15);
             }
         }
-        if(mouseL && this.ls<500) 
+        if(upPressed && this.ls<500) 
         {
             this.ls+=5;
             this.speed++;
         }
-        if(!mouseL && this.ls>1) 
+        if(!upPressed && this.ls>1) 
         {
             this.ls-=5;
             this.speed--;
@@ -384,3 +384,42 @@ class stars
         this._move();
     }
 }
+
+function button(x, y, w, h, txt)
+{
+    ctx.beginPath();
+    ctx.fillStyle = 'darkblue';
+    ctx.fillRect(x, y, w, h);
+    ctx.fill();
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(x+5, y+5, w-10, h-10);
+    ctx.fill();
+    ctx.closePath();
+    let size=parseInt((w/txt.length/3)*2);
+    ctx.font = size + 'pt Permanent Marker';
+    ctx.fillStyle = 'black';
+    ctx.fillText(txt, x + (w/2) - ctx.measureText(txt).width/2, y + (h/2) + size/2);
+}
+
+class mouse
+{
+    constructor(x, y, image)
+    {
+        this.x=x;
+        this.y=y;
+        this.image=image;
+        this.img=new Image();
+        this.img.src=this.image;
+    }
+
+    doShit()
+    {
+        this.x=mouseX;
+        this.y=mouseY;
+        ctx.drawImage(this.img, this.x - 100, this.y - 70, 512, 640);
+    }
+}
+
+mouse1=new mouse(x=0, y=0, image='img/mouse2.png');
+
+starBG=new stars(500, 1, 1);

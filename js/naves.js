@@ -241,3 +241,23 @@ class Nave
         this.drawFire();
     }
 }
+
+
+
+player1=new Nave
+(
+  x=c.width/2,
+  y=c.height-150,
+  sx=100,
+  sy=100,
+  speed=10,
+  fSpeed=10,
+  maxF=20,
+  cannons=2,
+  life=100,
+  maxLife=100,
+  image='img/nave1.png',
+  fImage='img/ff1.png',
+  shoots=[],
+  pc=true
+)

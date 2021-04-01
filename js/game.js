@@ -20,8 +20,8 @@ function menu()
     starBG.doShit();
     if(player1.life>0)
     {
-        text(c.width/2, c.height/2, 100, 'NEW GAME');
-        button(c.width/2 - 100, c.height/2 + 150, 200, 50, 'START');
+        text(c.width/2, c.height/2, ctx.canvas.width/24, 'NEW GAME');
+        button(c.width/2 - ctx.canvas.width/24, c.height/2 + ctx.canvas.width/18, ctx.canvas.width/12, ctx.canvas.width/48, 'START');
     }
     else
     {
@@ -29,7 +29,7 @@ function menu()
         button(c.width/2 - 100, c.height/2 + 150, 200, 50, 'RETRY');
     }
     mouse1.doShit();
-    if(mouseL && mouseX>c.width/2 - 100 && mouseX<c.width/2 + 100 && mouseY>c.height/2 + 150 && mouseY<c.height/2 + 200) 
+    if(mouseL && mouseX>c.width/2 - ctx.canvas.width/24 && mouseX<c.width/2 + ctx.canvas.width/24 && mouseY>c.height/2 + ctx.canvas.width/18 && mouseY<c.height/2 + ctx.canvas.width/12) 
     {   
         gameRunning=1;
         main();

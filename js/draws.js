@@ -416,7 +416,7 @@ class mouse
     {
         this.x=mouseX;
         this.y=mouseY;
-        ctx.drawImage(this.img, this.x - 100, this.y - 70, 512, 640);
+        ctx.drawImage(this.img, this.x - 100, this.y - 70, ctx.canvas.width/5, (ctx.canvas.width/5)/4*5);
     }
 }
 

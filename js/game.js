@@ -2,7 +2,6 @@
 let gameRunning=0;
 let level=0;
 let levelUp=0;
-let points=0;
 
 
 function drawHUD()
@@ -11,8 +10,8 @@ function drawHUD()
     {
         ctx.drawImage(player1.img, c.width-30-index*30, 25, 25, 25);
     }
-    text(c.width-player1.lives*60, 35, c.width/80, 'LIVES:');
-    text(c.width/2, 35, c.width/80, 'POINTS: '+ points);
+    text(c.width-200, 35, c.width/80, 'LIVES:');
+    text(c.width/2, 35, c.width/80, 'POINTS: '+ player1.points);
 }
 
 function main()
@@ -21,6 +20,7 @@ function main()
   starBG.doShit();
   player1.doShit();
   enemy1.doShit();
+  checkCol();
   if(enemy1.defeated)
   {
       level++;
@@ -29,9 +29,13 @@ function main()
       gameRunning=0;
       escPressed=true;
   }
-  enemy1.enemy[randomInt(0,40)*3+2]-=50;
-  points+=5;
+
+  
+  //enemy1.enemy[randomInt(0,40)*3+2]-=50;
+  //player1.points+=5;
   drawHUD();
+  if(player1.defeated) escPressed=true;
+  
   if(!escPressed) requestAnimationFrame(main);
   else 
   {
@@ -54,7 +58,7 @@ function menu()
             starBG.speed+=2;
         }
     }
-    else if(player1.life>0)
+    else if(!player1.defeated)
     {
         text(c.width/2, c.height/2, ctx.canvas.width/24, 'GREEN STAR');
         button(c.width/2 - ctx.canvas.width/24, c.height/2 + ctx.canvas.width/18, ctx.canvas.width/12, ctx.canvas.width/48, 'NEW GAME');
@@ -70,6 +74,7 @@ function menu()
         if(levelUp>0)
         {
             levelUp=0;
+            if(player1.lives<3) player1.lives++;
         }
         else
         {
@@ -77,7 +82,7 @@ function menu()
             level=0;
             newPlayer();
         }
-        newEnemy(4, 10, 5+(level*level), 10+level);
+        newEnemy(4, 10, 5+(level*level), 20+level);
         player1.disparando=true;
         gameRunning=1;
         escPressed=false;

@@ -47,6 +47,8 @@ class Nave
         this.fImg.src=fImage;
         this.disparando=false;
         this.lives=lives;
+        this.points=0;
+        this.defeated=false;
     }
     
     nlives()
@@ -275,7 +277,7 @@ class Enemy
             if(this.enemy[index*3+2]>0)
             {
                 this.enemy[index*3]+=this.speed*this.direction;
-                if(randomInt(1,200)==100) this.newFire(this.enemy[index*3]+30, this.enemy[index*3+1]+40);
+                if(randomInt(1,50)==20) this.newFire(this.enemy[index*3]+30, this.enemy[index*3+1]+40);
                 if(this.enemy[index*3] > ctx.canvas.width - 100) borde++;
                 if(this.enemy[index*3] < 40) borde++;
                 if(this.enemy[index*3+2]>0) areEnemies++;
@@ -322,7 +324,7 @@ function newEnemy(w, h , sp, fsp)
     (
         speed=sp,
         fSpeed=fsp,
-        maxF=20,
+        maxF=200,
         life=100,
         maxLife=100,
         image='img/malo1.png',
@@ -333,3 +335,45 @@ function newEnemy(w, h , sp, fsp)
 }
 
 newEnemy(4,10);
+
+function checkCol()
+{
+    for (let index = 0; index < enemy1.shoots.length/2; index++) 
+    {
+        if(between(enemy1.shoots[index*2], player1.x-player1.sx/4, player1.x+player1.sx/4) && between(enemy1.shoots[index*2+1], player1.y-player1.sy/2, player1.y+player1.sy/2)) //enemy hits player cockpit
+        {
+            player1.life-=10;
+            enemy1.shoots[index*2+1]=c.height+100;
+        }
+        if(between(enemy1.shoots[index*2], player1.x-player1.sx/2, player1.x-player1.sx/4) && between(enemy1.shoots[index*2+1], player1.y, player1.y+player1.sy/2)) //enemy hits player left wing
+        {
+            player1.life-=5;
+            enemy1.shoots[index*2+1]=c.height+100;
+        }
+        if(between(enemy1.shoots[index*2], player1.x+player1.sx/4, player1.x+player1.sx/2) && between(enemy1.shoots[index*2+1], player1.y, player1.y+player1.sy/2)) //enemy hits player right wing
+        {
+            player1.life-=5;
+            enemy1.shoots[index*2+1]=c.height+100;
+        }
+    }
+
+
+    if(player1.life<=0)
+    {
+        player1.lives--;
+        player1.life=player1.maxLife;
+    }
+    if(player1.lives<0) player1.defeated=true;
+    for (let indexf = 0; indexf < player1.maxF; indexf++) 
+    {
+        for (let indexe = 0; indexe < enemy1.quant; indexe++) 
+        {
+            if(between(player1.shoots[indexf*2], enemy1.enemy[indexe*3]+15, enemy1.enemy[indexe*3]+45) && between(player1.shoots[indexf*2+1], enemy1.enemy[indexe*3+1], enemy1.enemy[indexe*3+1]+50) && enemy1.enemy[indexe*3+2]>0) //player hits enemy cockpit
+            {
+                player1.points+=20;
+                enemy1.enemy[indexe*3+2]-=20;
+                player1.shoots[indexf*2+1]=-100;
+            }
+        }
+    }
+}

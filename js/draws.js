@@ -299,10 +299,7 @@ function text(x, y, size, text)
     ctx.fillText(text, x - ctx.measureText(text).width/2, y + size/2);
 }
 
-function randomInt(min, max) 
-{
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+
 
 function drawPixel(x, y, c) 
 {

@@ -295,7 +295,7 @@ ctx.canvas.height = window.innerHeight;
 function text(x, y, size, text)
 {
     ctx.font = 'bold '+ size + 'pt Faster One';
-    ctx.fillStyle = 'red';
+    ctx.fillStyle = 'green';
     ctx.fillText(text, x - ctx.measureText(text).width/2, y + size/2);
 }
 
@@ -407,19 +407,18 @@ class mouse
     {
         this.x=x;
         this.y=y;
-        this.image=image;
         this.img=new Image();
-        this.img.src=this.image;
+        this.img.src=image;
     }
 
     doShit()
     {
         this.x=mouseX;
         this.y=mouseY;
-        ctx.drawImage(this.img, this.x - 100, this.y - 70, ctx.canvas.width/5, (ctx.canvas.width/5)/4*5);
+        ctx.drawImage(this.img, this.x - 45, this.y - 30, 200, 250);
     }
 }
 
 mouse1=new mouse(x=0, y=0, image='img/mouse2.png');
 
-starBG=new stars(500, 1, 1);
+starBG=new stars(250, 1, 1);

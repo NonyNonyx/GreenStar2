@@ -1,26 +1,3 @@
-/*
-class enemy 
-{
-    constructor(x, y, sizex, sizey, movSpeed, shootSpeed, maxShoots, maxLife, image, fireImage, cannons, shoots) 
-    {
-        this.x=x;
-        this.y=y;
-        this.sizex=sizex;
-        this.sizey=sizey;
-        this.movSpeed=movSpeed;
-        this.shootSpeed=shootSpeed;
-        this.maxShoots=maxShoots;
-        this.maxLife=maxLife;
-        this.life= maxLife;
-        this.img=new Image();
-        this.img.src=image;
-        this.fImg=new Image();
-        this.fImg.src=fireImage;
-        this.cannons=cannons;
-        this.shoots=shoots;
-    }
-}*/
-
 class Nave
 {
     constructor(x, y, sx, sy, speed, fSpeed, maxF, cannons, life, maxLife, image, fImage, lives)

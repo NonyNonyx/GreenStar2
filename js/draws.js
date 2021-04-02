@@ -291,6 +291,17 @@ let c=document.getElementById("myCanvas");
 let ctx=c.getContext("2d");
 ctx.canvas.width  = window.innerWidth;
 ctx.canvas.height = window.innerHeight;
+let expFrame=50;
+let expX=0;
+let expY=0;
+let expBFrame=50;
+let expBX=0;
+let expBY=0;
+let expHFrame=50;
+let expHX=0;
+let expHY=0;
+let exp=new Image();
+exp.src='img/xplodeSprite.png';
 
 function text(x, y, size, text)
 {
@@ -299,7 +310,38 @@ function text(x, y, size, text)
     ctx.fillText(text, x - ctx.measureText(text).width/2, y + size/2);
 }
 
+function drawExp()
+{//48 240x240
+    if(expFrame<48)
+    {
+        fx=expFrame - Math.trunc(expFrame/8);
+        fy=Math.trunc(expFrame/8);
+        ctx.drawImage(exp, fx*240, fy*240, 240, 240, expX-30, expY-30, 60, 60);
+        expFrame++;
+    }
+}
 
+function drawExpH()
+{//48 240x240
+    if(expHFrame<48)
+    {
+        fx=expHFrame - Math.trunc(expHFrame/8);
+        fy=Math.trunc(expHFrame/8);
+        ctx.drawImage(exp, fx*240, fy*240, 240, 240, expHX-15, expHY-15, 30, 30);
+        expHFrame++;
+    }
+}
+
+function drawExpB()
+{//48 240x240
+    if(expBFrame<48)
+    {
+        fx=expBFrame - Math.trunc(expBFrame/8);
+        fy=Math.trunc(expBFrame/8);
+        ctx.drawImage(exp, fx*240, fy*240, 240, 240, expBX-60, expBY-60, 120, 120);
+        expBFrame++;
+    }
+}
 
 function drawPixel(x, y, c) 
 {
@@ -419,3 +461,10 @@ class mouse
 mouse1=new mouse(x=0, y=0, image='img/mouse2.png');
 
 starBG=new stars(250, 1, 1);
+
+function drawExps()
+{
+    drawExp();
+    drawExpB();
+    drawExpH();
+}

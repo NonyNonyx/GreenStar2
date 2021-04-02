@@ -5,6 +5,6 @@ function randomInt(min, max)
 
 function between(val, val1, val2)
 {
-    if(val>val1 && val<val2) return true;
+    if((val>val1 && val<val2) || (val>val2 && val<val1) || val==val1 ||val==val2) return true;
     else return false;
 }

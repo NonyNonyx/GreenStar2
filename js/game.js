@@ -12,6 +12,7 @@ function drawHUD()
     }
     text(c.width-200, 35, c.width/80, 'LIVES:');
     text(c.width/2, 35, c.width/80, 'POINTS: '+ player1.points);
+    text(200, 35, c.width/80, 'LEVEL: '+ level);
 }
 
 function main()
@@ -20,6 +21,7 @@ function main()
   starBG.doShit();
   player1.doShit();
   enemy1.doShit();
+  drawExps();
   checkCol();
   if(enemy1.defeated)
   {
@@ -29,8 +31,6 @@ function main()
       gameRunning=0;
       escPressed=true;
   }
-
-  
   //enemy1.enemy[randomInt(0,40)*3+2]-=50;
   //player1.points+=5;
   drawHUD();
@@ -75,6 +75,7 @@ function menu()
         {
             levelUp=0;
             if(player1.lives<3) player1.lives++;
+            player1.life=player1.maxLife;
         }
         else
         {

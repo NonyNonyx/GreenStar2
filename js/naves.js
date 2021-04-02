@@ -338,28 +338,42 @@ newEnemy(4,10);
 
 function checkCol()
 {
+    let hit=0;
     for (let index = 0; index < enemy1.shoots.length/2; index++) 
     {
         if(between(enemy1.shoots[index*2], player1.x-player1.sx/4, player1.x+player1.sx/4) && between(enemy1.shoots[index*2+1], player1.y-player1.sy/2, player1.y+player1.sy/2)) //enemy hits player cockpit
         {
             player1.life-=10;
             enemy1.shoots[index*2+1]=c.height+100;
+            hit++;
         }
         if(between(enemy1.shoots[index*2], player1.x-player1.sx/2, player1.x-player1.sx/4) && between(enemy1.shoots[index*2+1], player1.y, player1.y+player1.sy/2)) //enemy hits player left wing
         {
             player1.life-=5;
             enemy1.shoots[index*2+1]=c.height+100;
+            hit++;
         }
         if(between(enemy1.shoots[index*2], player1.x+player1.sx/4, player1.x+player1.sx/2) && between(enemy1.shoots[index*2+1], player1.y, player1.y+player1.sy/2)) //enemy hits player right wing
         {
             player1.life-=5;
             enemy1.shoots[index*2+1]=c.height+100;
+            hit++;
+        }
+        if(hit>0)
+        {
+            expHX=enemy1.shoots[index*2];
+            expHY=enemy1.shoots[index*2+1];
+            expHFrame=0;
+            hit=0;
         }
     }
 
 
     if(player1.life<=0)
     {
+        expBX=player1.x;
+        expBY=player1.y;
+        expBFrame=0;
         player1.lives--;
         player1.life=player1.maxLife;
     }
@@ -373,6 +387,12 @@ function checkCol()
                 player1.points+=20;
                 enemy1.enemy[indexe*3+2]-=20;
                 player1.shoots[indexf*2+1]=-100;
+                if(enemy1.enemy[indexe*3+2]<=0)
+                {
+                    expX=enemy1.enemy[indexe*3]+30;
+                    expY=enemy1.enemy[indexe*3+1]+25;
+                    expFrame=0;
+                }
             }
         }
     }

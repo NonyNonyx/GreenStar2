@@ -254,7 +254,7 @@ class Enemy
             if(this.enemy[index*3+2]>0)
             {
                 this.enemy[index*3]+=this.speed*this.direction*frameMult;
-                if(randomInt(1,50)==20) this.newFire(this.enemy[index*3]+30, this.enemy[index*3+1]+40);
+                if(randomInt(1,parseInt(100/frameMult))==20) this.newFire(this.enemy[index*3]+30, this.enemy[index*3+1]+40);
                 if(this.enemy[index*3] > ctx.canvas.width - 100) borde++;
                 if(this.enemy[index*3] < 40) borde++;
                 if(this.enemy[index*3+2]>0) areEnemies++;

@@ -75,6 +75,7 @@ function menu()
         {
             levelUp=0;
             if(player1.lives<3) player1.lives++;
+            else player1.points+=1000;
             player1.life=player1.maxLife;
         }
         else

@@ -108,7 +108,7 @@ class stars
     {
         for (let index = 0; index < this.count.length/3; index++) 
         {
-            this.count[index*3+1]+=this.count[index*3+2]+this.speed;
+            this.count[index*3+1]+=this.count[index*3+2]+this.speed*frameMult;
             if(this.count[index*3+1]>c.height)
             {
                 this.count[index*3]=randomInt(0,c.width);

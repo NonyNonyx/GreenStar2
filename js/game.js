@@ -17,6 +17,8 @@ function drawHUD()
 
 function main()
 {
+    
+    
   ctx.clearRect(0,0,c.width,c.height);
   starBG.doShit();
   player1.doShit();
@@ -35,7 +37,10 @@ function main()
   //player1.points+=5;
   drawHUD();
   if(player1.defeated) escPressed=true;
-  
+  stopT=Date.now();
+  frameMult=60/(1000/(stopT-startT));
+  startT=Date.now();
+  //text(c.width/2, 135, c.width/80, 'frameMult: '+ frameMult);
   if(!escPressed) requestAnimationFrame(main);
   else 
   {
@@ -88,6 +93,7 @@ function menu()
         player1.disparando=true;
         gameRunning=1;
         escPressed=false;
+        startT=Date.now();
         main();
     }
     if(gameRunning==0) requestAnimationFrame(menu);
